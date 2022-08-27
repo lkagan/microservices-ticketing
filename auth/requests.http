@@ -6,3 +6,12 @@ Content-Type: application/json
   "email": "test@example.com",
   "password": "secret123"
 }
+
+### Send POST request to signup with invalid email
+POST http://ticketing.test/api/users/signup
+Content-Type: application/json
+
+{
+  "email": "test",
+  "password": "secret123"
+}
