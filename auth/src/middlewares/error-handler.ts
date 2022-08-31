@@ -9,10 +9,9 @@ export const errorHandler = (
     next: NextFunction
 ) => {
     if (err instanceof RequestValidationError) {
-        console.log('Handling this error as a request validation error');
+        res.status(err.statusCode).send(err.serializeErrors());
     } else if (err instanceof DatabaseConnectionError) {
-        console.log('Handling this error as a DB connection error');
+        res.status(err.statusCode).send(err.serializeErrors());
     }
 
-    res.status(400).send({ message: 'Something went wrong' });
 };
