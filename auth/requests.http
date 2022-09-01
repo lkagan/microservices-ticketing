@@ -15,3 +15,7 @@ Content-Type: application/json
   "email": "test",
   "password": "secret123"
 }
+
+### Send request to route that doesn't exist (but ingress-nginx listens for)
+GET http://ticketing.test/api/users/abc123
+Accept: application/json
