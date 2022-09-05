@@ -2,9 +2,10 @@ import express from 'express';
 import { currentUserRouter } from "./routes/current-user";
 import { signinRouter } from "./routes/signin";
 import { signoutRouter } from "./routes/signout";
-import { signupRouter} from "./routes/signup";
+import { signupRouter } from "./routes/signup";
 import { NotFoundError } from "./errors/not-found-error";
 import { errorHandler } from "./middlewares/error-handler";
+import mongoose from 'mongoose';
 
 const app = express();
 app.use(express.json());
@@ -19,6 +20,17 @@ app.get('*', () => {
 
 app.use(errorHandler);
 
-app.listen(3000, () => {
-    console.log('Listening on port 3000!');
-});
+const start = async () => {
+    try {
+        await mongoose.connect('mongodb://auth-mongo-srv:27017/auth');
+        console.log('Connected to MongoDB');
+    } catch (err) {
+        console.error(err);
+    }
+
+    app.listen(3000, () => {
+        console.log('Listening on port 3000!');
+    });
+}
+
+start();
