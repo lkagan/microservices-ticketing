@@ -18,14 +18,14 @@ router.post('/api/users/signup', [
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-        return next(new RequestValidationError(errors.array()));
+        throw new RequestValidationError(errors.array());
     }
 
     const { email, password } = req.body;
     const existingUser = await User.findOne({ email });
 
     if (existingUser) {
-        return next(new BadRequestError('Email in use'));
+        throw new BadRequestError('Email in use');
     }
 
     const user = User.build({ email, password });
