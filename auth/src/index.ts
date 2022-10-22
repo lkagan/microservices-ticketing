@@ -14,7 +14,6 @@ app.set('trust proxy', true);
 app.use(express.json());
 app.use(cookieSession({
    signed: false,
-   secure: true,
 }));
 app.use(currentUserRouter);
 app.use(signinRouter);
